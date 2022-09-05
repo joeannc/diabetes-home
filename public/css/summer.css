@@ -1,0 +1,70 @@
+body{
+    background-color: #FFFBE8;
+}
+.nav{
+    background-color: #FFD506;
+}
+.nav a {
+    color: #313838;
+}
+.nav img {
+    filter: invert(18%) sepia(7%) saturate(755%) hue-rotate(131deg) brightness(30%) contrast(85%);
+}
+.dropdown-content{
+    color: #313838;
+}
+.dropdown-content A{
+    color: #313838;
+}
+.login-dropdown-content{
+    color: #313838;
+}
+.login-dropdown-content a{
+    color: #313838;
+}
+::-webkit-scrollbar-thumb {
+    background: #FFD506;
+}
+::-webkit-scrollbar-track {
+    background: #edf0f3;
+}
+.rank .people {
+    background-color: #edf0f3;
+}
+.bar {
+    border: 0.08rem solid rgb(255, 213, 6);
+}
+.fill {
+    border: #FFD506;
+}
+#viewdata {
+    border: 1px solid #FFD506;
+}
+#viewdata a {
+    color: #FFD506;
+}
+.colour {
+    filter: invert(70%) sepia(80%) saturate(5000%) hue-rotate(206deg) brightness(60%) contrast(100%);
+}
+#filter {
+    background-color: #313838;
+}
+.filter #dropbtn {
+    color: #E6F6FF;
+}
+.info .data {
+    background-color: #dcdfdb;
+}
+.info #bio {
+    background-color: #dcdfdb;
+}
+form .btn {
+    background-color: #FFD506;
+    border-color: #FFD506;
+}
+.commentArea {
+    border-color: #003473;
+}
+.content button {
+    color: #313838;
+}

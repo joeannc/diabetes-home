@@ -1,0 +1,904 @@
+* {
+  font-family: 'Lucida Fax','Lucida Sans',  'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+/* Clinician Title Bar */
+.clinicianTitleBar{
+    background-color: #DAE7E8;
+    position:fixed;
+      top: 0;
+      left: 0;
+      margin: 0px;
+      padding: 0px;
+      height: 80px;
+      width: 100%;
+      z-index: 999;
+  }
+  .clinicianTitleBar li{
+    float: left;
+    list-style-type:none;
+    position: relative;
+  }
+  
+  .clinicianTitleBar h1{
+    color: #00C6D4;
+    line-height: 100%;
+  }
+  .clinicianTitleBar li:first-child{
+    float:left;
+    padding:0 20%;
+  }
+  .clinicianTitleBar li:last-child{
+    float: right;
+    margin-right:3%;
+  }
+
+/* Clinician NavBar */
+  .clinicianNav{
+    background-image: linear-gradient(#00C6D4, #F7F2A3);
+    position:fixed;
+    top: 0;
+    left: 0;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 18%;
+    z-index: 1000;
+  }
+
+  .semi-circle {
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 150px;
+    width: 100%;
+    opacity: 49%;
+    border-radius: 150px 150px 0 0;
+    background-color: #FFFFFF;
+  }
+
+  .semi-circle li {
+    list-style-type:none;
+    float: left;
+    top: 40%;
+    left: 25%;
+    padding:1%;
+    position: relative;
+  }
+
+  .semi-circle li a{
+    display:block;
+    color: #707070;
+    font-size:30px;
+  }
+
+  .semi-circle li a:hover {
+    border-bottom: 4px solid #00C6D4;
+    color: black;
+}
+
+  /* Clinician NavBar - clinician's information */
+  .clinicianInfo li {
+    padding-top: 10%;
+    list-style-type: none;
+  }
+
+  .clinicianInfo li img{
+    float:left;
+    padding:0 35%;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .clinicianInfo li p{
+    text-align:center;
+    color: #707070;
+    font-size:23px;
+    line-height: 30px;
+  }
+
+  .date li{
+    list-style-type: none;
+  }
+
+  #date{
+    text-align:center;
+    color: #707070;
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  #time{
+    text-align:center;
+    color: #707070;
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+/* Clinician NavBar - clinician's pages */
+.pages{
+    padding-top: 10%;
+}
+
+.pages img{
+    position:relative;
+    top:8px;
+    cursor: pointer;
+}
+
+.pages li{
+    text-align:left;
+    padding: 4% 13%;
+    font-size: 20.5px;
+    color: #707070;
+    list-style-type: none;
+}
+
+.pages li a{
+    text-decoration: none;
+    color: #707070;
+    cursor: pointer;
+}
+
+.pages li a:hover {
+    border-bottom: 4px solid #FFFFFF;
+    color: black;
+    opacity: 49%
+}
+
+/* General Body Part of each page */
+body {
+  padding-top: 4.5%;
+  margin-left: 18.5%;
+  padding-bottom: 1%;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #F0F8F4;
+  color: #505050;
+}
+
+body h2 {
+  left: 18px;
+  position: relative;
+  color: black;
+}
+
+/* Dashboard - TODAY PATIENTS' OVERVIEW */
+.overview{
+  height: 100%;
+  padding: 5px;
+  float:left;
+  width: 65%;
+  background-color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  border-radius: 40px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.circle{
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%; 
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.overview li,  .overview ul{
+  list-style-type: none;
+}
+
+.overview ul{
+  display : inline;
+  white-space : nowrap ;
+}
+
+.overview li{
+  float: right;
+  right: 5px;
+  position: relative;
+}
+
+.overview li:first-child{
+  float: left;
+  left: 18px;
+}
+
+.overview h4{
+  line-height: 1px;
+  padding-top: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.overview .border{
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
+  margin-right: 15px;
+  display: block;
+  border: 3px dotted #00C6D4;
+  border-radius: 20px;
+  font-weight:bold;
+  z-index: 99;
+}
+
+.overview .border h4{
+  font-size: 14px;
+}
+
+.overview table{
+  float: left;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  line-height: 35px;
+  font-size: 18px;
+  border-collapse: collapse;
+}
+
+.overview table tr:nth-child(even) {
+  background-color: #e5efef;
+}
+
+.overview #name{
+  text-decoration: none;
+  color: #505050;
+}
+
+.overview #name:hover {
+  color: black;
+  font-size: 23px;
+  font-weight:bold;
+}
+
+ #over_threshold {
+  color: red;
+  font-weight:bold;
+}
+
+#under_threshold {
+  color: blue;
+  font-weight: bold;
+}
+
+/* Scrollbar for each parts */
+/* width */
+.body::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.body::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+.body::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+.body::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+/* Dashborad - PATIENTS' COMMENT */
+.comment{
+  margin-left: 0.5%;
+  padding: 5px;
+  float:left;
+  width: 32%;
+  height: 100%;
+  background-color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  border-radius: 40px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.comment img{
+  float: left;
+  top: 6px;
+  position: absolute;
+}
+
+.name_and_title {
+  position: relative;
+  left: 50px;
+}
+
+.comment_time {
+  position: absolute;
+  right: 15px;
+}
+
+.content {
+  position: relative;
+  left: 50px;
+}
+
+.dcomment {
+  text-decoration: none;
+  color: #505050;
+}
+
+.dcomment:hover {
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.comment-text {
+  max-height: 180px;
+  overflow-y: scroll;
+}
+
+.comment li{
+  list-style-type: none;
+  display : inline;
+}
+
+.comment table{
+  background-color: #e5efef;
+  border-radius: 40px;
+  float: center;
+  width: 98%;
+  position: relative;
+  line-height: 35px;
+  font-size: 18px;
+  border-collapse: collapse;
+  text-align: left;
+}
+.content{
+  padding-right: 50px;
+  word-break:break-word;
+  white-space:normal;
+}
+
+/* Hint style for each pages */
+.hint {
+  padding-left: 12px;
+  padding-right: 12px;
+  display: block;
+  color: rgb(120, 33, 33);
+  background-color: #efefe5;
+  border: 6px solid #efefe5;;
+  border-radius: 40px;
+  font-weight:bold;
+  z-index: 99;
+}
+
+#commentIcon{
+  width:20px; 
+  height:20px;
+}
+
+/* Individual Patient page - Requirement */
+#requirement{
+  margin-left: 0.5%;
+  padding: 5px;
+  float:left;
+  width: 32%;
+  height: 260px;
+}
+#requirement li:last-child{
+  float: right;
+  bottom:0;
+  right: 40px;
+  position: relative;
+}
+
+#requirement button{
+  background-color: white;
+  border-radius: 40px;
+  margin-top: 30%;
+  font-size: 23px;
+}
+
+/* Individual Patient page - Support message & Clinician notes */
+.message{
+  margin-left: 0.5%;
+  margin-top: 0.5%;
+  padding: 5px;
+  float:left;
+  width: 32%;
+  background-color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  border-radius: 40px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.message h2{
+  left: 38px;
+}
+
+#supportMessage{
+  height: 300px;
+}
+.message h4{
+  padding: 0 20px 5px;
+}
+
+#note{
+  height: 355px;
+}
+
+#moreNotes{
+  vertical-align: middle;
+  font-size: 20px;
+  background-color: white;
+  border-radius:15px;
+  vertical-align: center;
+  line-height: 140%;
+}
+
+.message h3{
+  text-align: right;
+  padding-right: 30px;
+  line-height: 10px;
+}
+
+#note textarea, #note button{
+  bottom: 10px;
+}
+
+.message textarea{
+  width: 96%;
+	height: auto;
+  margin-left: 2%;
+  margin-bottom: 5px;
+	border: 3px solid #cccccc;
+  font-size: 16px;
+  border-radius: 20px;
+	padding: 5px;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+}
+
+/* Individual Patient page -  Popup */
+.popup {
+  text-decoration: none;
+  color: #505050;
+}
+.overlay_flight_traveldil {
+  position: fixed;
+  top: 9%;
+  bottom: 1%;
+  left: 18.5%;
+  right: 0;
+  width: 53.1%;
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(0, 0, 0, 0.7);
+  border-radius: 40px;
+  z-index: 100;
+
+}
+.overlay_flight_traveldil:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup_flight_travlDil {
+  margin: 130px auto;
+  padding: 20px;
+  background: #fff;
+  border: 2px solid #fff;
+  border: 8px solid black; 
+  border-radius: 40px;
+  width: 40%;
+  position: relative;
+  transition: all 2s ease-in-out;
+}
+.popup_flight_travlDil p { 
+  margin-top: -25px;
+  font-weight: bold;
+}
+.popup_flight_travlDil .close_flight_travelDl {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup_flight_travlDil .content_flightht_travel_dil {
+  max-height: 30%;
+  overflow: auto;
+  font-size: 23px;
+}
+
+.popup_flight_travlDil h2{
+  left: 1%;
+}
+
+/* Individual Patient page - Message Button */
+.buttonInd:main,
+.buttonInd:focus {
+  user-select: auto;
+}
+
+.buttonInd:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+.buttonInd:disabled {
+  cursor: auto;
+}
+.buttonInd {
+  appearance: button;
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
+  margin-left: 75%;
+  background-color: #009CB8;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 10px;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 20%;
+}
+
+.buttonInd:after {
+  background-clip: padding-box;
+  background-color: #00C6D4;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+
+
+/* Edit Requirement page */
+#editReq {
+  margin-top: 5%;
+  margin-left: 8.5%;
+  height: 600px;
+  width: 80%;
+  overflow: hidden;
+}
+
+#editReq table{
+  line-height: 80px;
+  font-size: 25px;
+}
+
+#editReq input{
+  font-size:20px;
+  display: visiable;
+}
+
+#editReq #save{
+  top: 8%;
+  float: right;
+  right: 10%;
+  position: relative;
+  font-size: 25px;
+}
+
+#lower_EX {
+  display: inline;
+}
+
+/* Clinician Notes page */
+.clinicianNotes .overview{
+  margin-left: 5%;
+  width: 90%;
+}
+
+.clinicianNotes .hint{
+  color: #282936;
+}
+
+
+
+/* Clinician Notes page —— Button (go back to previous page) */
+#goBack {
+ position: relative;
+ display: inline-block;
+ cursor: pointer;
+ outline: none;
+ border: 0;
+ vertical-align: middle;
+ text-decoration: none;
+ background: transparent;
+ padding: 0;
+ font-size: 15px;
+}
+
+#goBack.view-more {
+ width: 16rem;
+ height: auto;
+}
+
+#goBack.view-more .circle {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ position: relative;
+ display: block;
+ margin: 0;
+ width: 2rem;
+ height: 2rem;
+ background: #282936;
+ border-radius: 1.625rem;
+}
+
+#goBack.view-more .circle .icon {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ position: absolute;
+ top: 0;
+ bottom: 0;
+ margin: auto;
+ background: #fff;
+}
+
+#goBack.view-more .circle .icon.arrow {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ left: 0.1rem;
+ width: 1.25em;
+ height: 0.125rem;
+ background: none;
+}
+
+#goBack.view-more .circle .icon.arrow::before {
+ position: absolute;
+ content: "";
+ top: -0.29rem;
+ right: 0.0625rem;
+ width: 0.625rem;
+ height: 0.625rem;
+ border-top: 0.125rem solid #fff;
+ border-right: 0.125rem solid #fff;
+ transform: rotate(45deg);
+}
+
+#goBack.view-more .button-text {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ position: absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ padding: 0.35rem 0.65rem;
+ margin: 0 0 0 1.85rem;
+ color: #282936;
+ font-weight: 700;
+ line-height: 1.6;
+ text-align: center;
+ text-transform: uppercase;
+}
+
+#goBack:hover .circle {
+ width: 100%;
+}
+
+#goBack:hover .circle .icon.arrow {
+ background: #fff;
+ transform: translate(1rem, 0);
+}
+
+#goBack:hover .button-text {
+ color: #fff;
+}
+
+
+
+/* Profile page */
+.profile{
+  font-size: 20px;
+  color:black;
+  border-spacing: 30px;
+  padding-top:20px;
+  padding-left: 20px;
+ 
+}
+
+.profile tr td:nth-child(1) { 
+  text-align: left;
+  
+}
+.profile tr td:nth-child(2) { 
+  background-color:white; 
+  padding:10px;
+  word-wrap:break-word;
+  width: 500px;
+}
+.editprofilebuttom{
+  background-color: #FFD65B;
+  border-color: #ffd65b;
+  font-size: 30px;
+  padding-left:20px;
+  padding-right:20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #fff;
+  border-radius: 50px;
+  float: left;
+  margin-left: 615px;
+  margin-top: 30px;
+  position: relative;
+}
+
+/* Edit profile paege */
+.editprofile tr td:nth-child(2){
+  word-wrap:break-word;
+
+  background-color: while;
+  color:black;
+  width: 500px;
+ 
+}
+.editprofile{
+  font-size: 20px;
+  padding-top:20px;
+  padding-left: 20px;
+  color:black;
+  border-spacing: 30px;
+  
+}
+input[type=text] {
+  background-color:white; 
+  padding:10px;
+  width: 500px;
+  color:gray;
+  border-style: hidden;
+  font-size: 25px;
+  border-color: white;
+  word-wrap:break-word;
+}
+
+#savebtn{
+  background-color: #FFD65B;
+  border-color: #ffd65b;
+  font-size: 30px;
+  padding-left:30px;
+  padding-right:30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: #fff;
+  border-radius: 50px;
+  float: left;
+  margin-left: 615px;
+  margin-top: 30px;
+  position: relative;
+}
+
+
+
+
+#newbio{
+
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid white;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 30px;
+  resize: none;
+  color:gray;
+}
+
+/* Popup */
+.popup {
+  text-decoration: none;
+  color: #505050;
+}
+.overlay_flight_traveldil {
+  position: fixed;
+  top: 15%;
+  bottom: 1%;
+  left: 18.5%;
+  right: 0;
+  width: 53.1%;
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay_flight_traveldil:target {
+  visibility: visible;
+  opacity: 1;
+}
+.popup_flight_travlDil {
+  margin: 130px auto;
+  padding: 20px;
+  background: #fff;
+  border: 2px solid #fff;
+  border: 8px solid rgba(0, 0, 0, 0.7); 
+  box-shadow: 0px 0px 60px 20px hsl(184, 20%, 75%);
+  border-radius: 40px;
+  width: 40%;
+  position: relative;
+  transition: all 2s ease-in-out;
+}
+.popup_flight_travlDil p { 
+  margin-top: -25px;
+  font-weight: bold;
+}
+.popup_flight_travlDil .close_flight_travelDl {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup_flight_travlDil .content_flightht_travel_dil {
+  max-height: 30%;
+  overflow: auto;
+}
+
+.popup_flight_travlDil h2{
+  left: 1%;
+}
+/*Reset password page*/
+.resetPsw{
+
+  padding: 30px;
+  text-align: center;
+  padding-top: 120px;
+}
+.resetPsw input[type=password], select {
+  width: 30%;
+  height: 60px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 30px;
+}
+#btnforpsw{
+  background-color: #FFD65B;
+  border-color: #ffd65b;
+  font-size: 30px;
+  padding-left:30px;
+  padding-right:30px;
+  padding-top:10px;
+  padding-bottom:10px;
+  color: #fff;
+  border-radius: 50px;
+  float: left;
+  margin-left: 675px;
+  margin-top: 30px;
+  position: relative;
+}
+.back{
+  margin-top: 30px;
+  margin-left: 30px;
+  position: relative;
+}
+
+

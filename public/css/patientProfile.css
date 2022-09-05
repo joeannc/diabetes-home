@@ -1,0 +1,98 @@
+:root {
+    box-sizing: border-box;
+}
+body {
+    box-sizing: border-box;
+    color: #707070;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 5%;
+}
+button {
+    background-color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    border-radius: 20px;
+    color: #707070;
+    border-color: #bdbdbd;
+    margin-top: 20px;
+    font-size: 17px;
+    width: 165px;
+    padding: 1%;
+    cursor: pointer;
+}
+.data {
+    background-color: #E7EDEA;
+    height: 20px;
+    margin-top: -20px;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+}
+#bio {
+    background-color: #E7EDEA;
+    height: 90px;
+    margin-top: -20px;
+    padding: 1%;
+    overflow-y: scroll;
+}
+input {
+    background: none;
+    border: none;
+    font-size: large;
+    font-family: 'Lucida Fax','Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #707070;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+}
+textarea {
+    background: none;
+    border: none;
+    font-size: large;
+    font-family: 'Lucida Fax','Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #707070;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+}
+::-webkit-scrollbar {
+    width: 4px; 
+    height: 1px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(97, 184, 179, 0.1);
+    background: #22babb;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgba(87, 175, 187, 0.1);
+    border-radius: 10px;
+    background: #ededed;
+}
+
+@media screen and (max-width: 700px) {
+    button {
+        width: 120px;
+        font-size: 13px;
+    }
+    .data {
+        height: 30px;
+    }
+}
+@media screen and (min-width: 700px) {
+    .info {
+        font-size: 23px;
+    }
+    input {
+        font-size: 23px;
+    }
+    textarea {
+        font-size: 23px;
+    }
+}

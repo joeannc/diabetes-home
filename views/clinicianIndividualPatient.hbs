@@ -1,0 +1,743 @@
+<head>
+    <link rel="stylesheet" href="/css/clinicianStyle.css">
+    <link rel="stylesheet" href="/css/emojionearea.css">
+    <script src="/emojionearea.js"></script>
+</head>
+
+{{>clinicianTitleBar}}
+
+{{>clinicianNav}} 
+
+<main>
+    <div class="overview">
+        <ul>
+            <li>
+                <h2><a href="/clinician/AllPatients/{{patient_email}}/profile" style="color:black" id="name">{{patient_screen_name}}'s</a> OVERVIEW</h2>
+                <p class="hint">
+                    Click above patient's name to check profile!<br>
+                    Click each data to see its comment if available!
+                </p>
+            
+            </li>
+            <li class="border">
+                <table >
+                    <tr><h4><img src="/images/clinician_comment.png"  style: width="18px" height="18px"> : Comment </h4></tr>
+                    <tr><h4><img src="/images/circle_red.png"  style: width="16px" height="16px"> : Over safety thresholds </h4> </tr>
+                    <th><h4><img src="/images/circle_blue.png"  style: width="16px" height="16px"> : Lower safety thresholds </h4></tr>
+                </table>
+            </li>
+        </ul>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Blood Glucose (nmol/L)</th>
+                <th>Weight (kg)</th>
+                <th>Insulin (doses)</th>
+                <th>Exercise (steps)</th>
+            </tr>
+            {{#each records}}
+                <td>
+                    <a>{{this.entryDate}}</a>
+                </td>
+                {{#if this.PatientID.Bloodglucose.requirement}}
+                    {{#if this.Bloodglucose.data}}
+                        {{#if this.Bloodglucose.over_threshold}}
+                            {{#if this.Bloodglucose.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Bloodglucose.comment._id}}" id = "over_threshold">{{this.Bloodglucose.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Bloodglucose.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>BLOOD GLUCOSE</h2>
+                                            <p>{{this.Bloodglucose.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Bloodglucose.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{else}}
+                                <td id="over_threshold">{{this.Bloodglucose.data}}</td>
+                            {{/if}}
+                        {{else}}
+                            {{#if this.Bloodglucose.under_threshold}}
+                                {{#if this.Bloodglucose.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Bloodglucose.comment._id}}" id = "under_threshold">{{this.Bloodglucose.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Bloodglucose.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>BLOOD GLUCOSE</h2>
+                                            <p>{{this.Bloodglucose.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Bloodglucose.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                {{else}}
+                                    <td id="under_threshold">{{this.Bloodglucose.data}}</td>
+                                {{/if}}
+                            {{else}}
+                                {{#if this.Bloodglucose.comment.data}}
+                                    <td>
+                                        <a class="popup" href="#popup_flight_travlDil{{this.Bloodglucose.comment._id}}">{{this.Bloodglucose.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                        <div id="popup_flight_travlDil{{this.Bloodglucose.comment._id}}" class="overlay_flight_traveldil">
+                                            <div class="popup_flight_travlDil">
+                                                <h2>BLOOD GLUCOSE</h2>
+                                                <p>{{this.Bloodglucose.comment.entryTime}}</p>
+                                                <a class="close_flight_travelDl" href="#">&times;</a>
+                                                <div class="content_flightht_travel_dil"> {{this.Bloodglucose.comment.data}}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                {{else}}
+                                    <td>{{this.Bloodglucose.data}}</td>
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    {{else}}
+                        {{#if this.Bloodglucose.requirement}}
+                            {{#if this.Bloodglucose.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Bloodglucose.comment._id}}">  <img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Bloodglucose.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>BLOOD GLUCOSE</h2>
+                                            <p>{{this.Bloodglucose.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Bloodglucose.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{else}}
+                                <td>  </td>    
+                            {{/if}}  
+                        {{else}}
+                            <td>——</td>
+                        {{/if}}
+                    {{/if}}
+                {{!-- no need to input this data,
+                but possibly need to input previously --}}
+                {{else}}
+                    {{#if this.Bloodglucose.requirement}}
+                        {{#if this.Bloodglucose.data}}
+                            {{#if this.Bloodglucose.over_threshold}}
+                                {{#if this.Bloodglucose.comment.data}}
+                                    <td>
+                                        <a class="popup" href="#popup_flight_travlDil{{this.Bloodglucose.comment._id}}" id = "over_threshold">{{this.Bloodglucose.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                        <div id="popup_flight_travlDil{{this.Bloodglucose.comment._id}}" class="overlay_flight_traveldil">
+                                            <div class="popup_flight_travlDil">
+                                                <h2>BLOOD GLUCOSE</h2>
+                                                <p>{{this.Bloodglucose.comment.entryTime}}</p>
+                                                <a class="close_flight_travelDl" href="#">&times;</a>
+                                                <div class="content_flightht_travel_dil"> 11:{{this.Bloodglucose.comment.data}}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                {{else}}
+                                    <td id="over_threshold">{{this.Bloodglucose.data}}</td>
+                                {{/if}}
+                            {{else}}
+                                {{#if this.Bloodglucose.under_threshold}}
+                                    {{#if this.Bloodglucose.comment.data}}
+                                        <td>
+                                            <a class="popup" href="#popup_flight_travlDil{{this.Bloodglucose.comment._id}}" id = "under_threshold">{{this.Bloodglucose.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                            <div id="popup_flight_travlDil{{this.Bloodglucose.comment._id}}" class="overlay_flight_traveldil">
+                                                <div class="popup_flight_travlDil">
+                                                    <h2>BLOOD GLUCOSE</h2>
+                                                    <p>{{this.Bloodglucose.comment.entryTime}}</p>
+                                                    <a class="close_flight_travelDl" href="#">&times;</a>
+                                                    <div class="content_flightht_travel_dil"> {{this.Bloodglucose.comment.data}}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    {{else}}
+                                        <td id="under_threshold">{{this.Bloodglucose.data}}</td>
+                                    {{/if}}
+                                {{else}}
+                                    {{#if this.Bloodglucose.comment.data}}
+                                        <td>
+                                            <a class="popup" href="#popup_flight_travlDil{{this.Bloodglucose.comment._id}}">{{this.Bloodglucose.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                            <div id="popup_flight_travlDil{{this.Bloodglucose.comment._id}}" class="overlay_flight_traveldil">
+                                                <div class="popup_flight_travlDil">
+                                                    <h2>BLOOD GLUCOSE</h2>
+                                                    <p>{{this.Bloodglucose.comment.entryTime}}</p>
+                                                    <a class="close_flight_travelDl" href="#">&times;</a>
+                                                    <div class="content_flightht_travel_dil"> {{this.Bloodglucose.comment.data}}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    {{else}}
+                                        <td>{{this.Bloodglucose.data}}</td>
+                                    {{/if}}
+                                {{/if}}
+                            {{/if}}
+                        {{else}}
+                            {{#if this.Bloodglucose.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Bloodglucose.comment._id}}">  <img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Bloodglucose.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>BLOOD GLUCOSE</h2>
+                                            <p>{{this.Bloodglucose.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Bloodglucose.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{else}}
+                                <td>  </td>    
+                            {{/if}}  
+                        {{/if}}
+                    {{else}}
+                        <td>——</td>
+                    {{/if}}
+                {{/if}}
+
+                {{#if this.PatientID.Weight.requirement}}
+                    {{#if this.Weight.data}}
+                        {{#if this.Weight.over_threshold}}
+                            {{#if this.Weight.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Weight.comment._id}}" id = "over_threshold">{{this.Weight.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Weight.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>WEIGHT</h2>
+                                            <p>{{this.Weight.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil">{{this.Weight.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{else}}
+                                <td id="over_threshold">{{this.Weight.data}}</td>
+                            {{/if}}
+                        {{else}}
+                            {{#if this.Weight.under_threshold}}
+                                {{#if this.Weight.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Weight.comment._id}}" id = "under_threshold">{{this.Weight.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Weight.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>WEIGHT</h2>
+                                            <p>{{this.Weight.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Weight.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                {{else}}
+                                    <td id="under_threshold">{{this.Weight.data}}</td>
+                                {{/if}}
+                            {{else}}
+                                {{#if this.Weight.comment.data}}
+                                    <td>
+                                        <a class="popup" href="#popup_flight_travlDil{{this.Weight.comment._id}}">{{this.Bloodglucose.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                        <div id="popup_flight_travlDil{{this.Weight.comment._id}}" class="overlay_flight_traveldil">
+                                            <div class="popup_flight_travlDil">
+                                                <h2>WEIGHT</h2>
+                                                <p>{{this.Weight.comment.entryTime}}</p>
+                                                <a class="close_flight_travelDl" href="#">&times;</a>
+                                                <div class="content_flightht_travel_dil"> {{this.Weight.comment.data}}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                {{else}}
+                                    <td>{{this.Weight.data}}</td>
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    {{else}}
+                        {{#if this.Weight.requirement}}
+                            {{#if this.Weight.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Weight.comment._id}}">  <img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Weight.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>WEIGHT</h2>
+                                            <p>{{this.Weight.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Weight.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{else}}
+                                <td>  </td>    
+                            {{/if}}  
+                        {{else}}
+                            <td>——</td>
+                        {{/if}}
+                    {{/if}}
+                {{!-- no need to input this data,
+                but possibly need to input previously --}}
+                {{else}}
+                    {{#if this.Weight.requirement}}
+                        {{#if this.Weight.data}}
+                            {{#if this.Weight.over_threshold}}
+                                {{#if this.Weight.comment.data}}
+                                    <td>
+                                        <a class="popup" href="#popup_flight_travlDil{{this.Weight.comment._id}}" id = "over_threshold">{{this.Weight.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                        <div id="popup_flight_travlDil{{this.Weight.comment._id}}" class="overlay_flight_traveldil">
+                                            <div class="popup_flight_travlDil">
+                                                <h2>WEIGHT</h2>
+                                                <p>{{this.Weight.comment.entryTime}}</p>
+                                                <a class="close_flight_travelDl" href="#">&times;</a>
+                                                <div class="content_flightht_travel_dil">{{this.Weight.comment.data}}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                {{else}}
+                                    <td id="over_threshold">{{this.Weight.data}}</td>
+                                {{/if}}
+                            {{else}}
+                                {{#if this.Weight.under_threshold}}
+                                    {{#if this.Weight.comment.data}}
+                                        <td>
+                                            <a class="popup" href="#popup_flight_travlDil{{this.Weight.comment._id}}" id = "under_threshold">{{this.Weight.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                            <div id="popup_flight_travlDil{{this.Weight.comment._id}}" class="overlay_flight_traveldil">
+                                                <div class="popup_flight_travlDil">
+                                                    <h2>WEIGHT</h2>
+                                                    <p>{{this.Weight.comment.entryTime}}</p>
+                                                    <a class="close_flight_travelDl" href="#">&times;</a>
+                                                    <div class="content_flightht_travel_dil"> {{this.Weight.comment.data}}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    {{else}}
+                                        <td id="under_threshold">{{this.Weight.data}}</td>
+                                    {{/if}}
+                                {{else}}
+                                    {{#if this.Weight.comment.data}}
+                                        <td>
+                                            <a class="popup" href="#popup_flight_travlDil{{this.Weight.comment._id}}">{{this.Weight.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                            <div id="popup_flight_travlDil{{this.WEIGHT.comment._id}}" class="overlay_flight_traveldil">
+                                                <div class="popup_flight_travlDil">
+                                                    <h2>WEIGHT</h2>
+                                                    <p>{{this.Weight.comment.entryTime}}</p>
+                                                    <a class="close_flight_travelDl" href="#">&times;</a>
+                                                    <div class="content_flightht_travel_dil"> {{this.Weight.comment.data}}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    {{else}}
+                                        <td>{{this.Weight.data}}</td>
+                                    {{/if}}
+                                {{/if}}
+                            {{/if}}
+                        {{else}}
+                            {{#if this.Weight.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Weight.comment._id}}">  <img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Weight.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>WEIGHT</h2>
+                                            <p>{{this.Weight.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Weight.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{else}}
+                                <td>  </td>    
+                            {{/if}} 
+                        {{/if}}
+                    {{else}}
+                        <td>——</td>
+                    {{/if}}
+                {{/if}}
+
+                {{#if this.PatientID.Insulin.requirement}}
+                    {{#if this.Insulin.data}}
+                        {{#if this.Insulin.over_threshold}}
+                            {{#if this.Insulin.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Insulin.comment._id}}" id = "over_threshold">{{this.Insulin.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Insulin.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>INSULIN</h2>
+                                            <p>{{this.Insulin.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil">{{this.Insulin.comment.data}} </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{else}}
+                                <td id="over_threshold">{{this.Insulin.data}}</td>
+                            {{/if}}
+                        {{else}}
+                            {{#if this.Insulin.under_threshold}}
+                                {{#if this.Insulin.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Insulin.comment._id}}" id = "under_threshold">{{this.Insulin.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Insulin.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>INSULIN</h2>
+                                            <p>{{this.Insulin.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Insulin.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                {{else}}
+                                    <td id="under_threshold">{{this.Insulin.data}}</td>
+                                {{/if}}
+                            {{else}}
+                                {{#if this.Insulin.comment.data}}
+                                    <td>
+                                        <a class="popup" href="#popup_flight_travlDil{{this.Insulin.comment._id}}">{{this.Insulin.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                        <div id="popup_flight_travlDil{{this.Insulin.comment._id}}" class="overlay_flight_traveldil">
+                                            <div class="popup_flight_travlDil">
+                                                <h2>INSULIN</h2>
+                                                <p>{{this.Insulin.comment.entryTime}}</p>
+                                                <a class="close_flight_travelDl" href="#">&times;</a>
+                                                <div class="content_flightht_travel_dil"> {{this.Insulin.comment.data}}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                {{else}}
+                                    <td>{{this.Insulin.data}}</td>
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    {{else}}
+                        {{#if this.Insulin.requirement}}
+                            {{#if this.Insulin.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Insulin.comment._id}}">  <img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Insulin.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>INSULIN</h2>
+                                            <p>{{this.Insulin.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Insulin.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{else}}
+                                <td>  </td>    
+                            {{/if}}  
+                        {{else}}
+                            <td>——</td>
+                        {{/if}}   
+                    {{/if}}
+                {{!-- no need to input this data,
+                but possibly need to input previously --}}
+                {{else}}
+                    {{#if this.Insulin.requirement}}
+                        {{#if this.Insulin.data}}
+                            {{#if this.Insulin.over_threshold}}
+                                {{#if this.Insulin.comment.data}}
+                                    <td>
+                                        <a class="popup" href="#popup_flight_travlDil{{this.Insulin.comment._id}}" id = "over_threshold">{{this.Insulin.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                        <div id="popup_flight_travlDil{{this.Insulin.comment._id}}" class="overlay_flight_traveldil">
+                                            <div class="popup_flight_travlDil">
+                                                <h2>INSULIN</h2>
+                                                <p>{{this.Insulin.comment.entryTime}}</p>
+                                                <a class="close_flight_travelDl" href="#">&times;</a>
+                                                <div class="content_flightht_travel_dil">{{this.Insulin.comment.data}}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                {{else}}
+                                    <td id="over_threshold">{{this.Insulin.data}}</td>
+                                {{/if}}
+                            {{else}}
+                                {{#if this.Insulin.under_threshold}}
+                                    {{#if this.Insulin.comment.data}}
+                                        <td>
+                                            <a class="popup" href="#popup_flight_travlDil{{this.Insulin.comment._id}}" id = "under_threshold">{{this.Insulin.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                            <div id="popup_flight_travlDil{{this.Insulin.comment._id}}" class="overlay_flight_traveldil">
+                                                <div class="popup_flight_travlDil">
+                                                    <h2>INSULIN</h2>
+                                                    <p>{{this.Insulin.comment.entryTime}}</p>
+                                                    <a class="close_flight_travelDl" href="#">&times;</a>
+                                                    <div class="content_flightht_travel_dil"> {{this.Insulin.comment.data}}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    {{else}}
+                                        <td id="under_threshold">{{this.Insulin.data}}</td>
+                                    {{/if}}
+                                {{else}}
+                                    {{#if this.Insulin.comment.data}}
+                                        <td>
+                                            <a class="popup" href="#popup_flight_travlDil{{this.Insulin.comment._id}}">{{this.Insulin.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                            <div id="popup_flight_travlDil{{this.Insulin.comment._id}}" class="overlay_flight_traveldil">
+                                                <div class="popup_flight_travlDil">
+                                                    <h2>INSULIN</h2>
+                                                    <p>{{this.Insulin.comment.entryTime}}</p>
+                                                    <a class="close_flight_travelDl" href="#">&times;</a>
+                                                    <div class="content_flightht_travel_dil"> {{this.Insulin.comment.data}}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    {{else}}
+                                        <td>{{this.Insulin.data}}</td>
+                                    {{/if}}
+                                {{/if}}
+                            {{/if}}
+                        {{else}}
+                            {{#if this.Insulin.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Insulin.comment._id}}">  <img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Insulin.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>INSULIN</h2>
+                                            <p>{{this.Insulin.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Insulin.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{else}}
+                                <td>  </td>    
+                            {{/if}} 
+                        {{/if}}
+                    {{else}}
+                        <td>——</td>
+                    {{/if}}
+                {{/if}}
+
+                {{#if this.PatientID.Steps.requirement}}
+                    {{#if this.Steps.data}}
+                        {{#if this.Steps.over_threshold}}
+                            {{#if this.Steps.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Steps.comment._id}}" id = "over_threshold">{{this.Steps.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Steps.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>EXERCISE</h2>
+                                            <p>{{this.Steps.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil">{{this.Steps.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{else}}
+                                <td id="over_threshold">{{this.Steps.data}}</td>
+                            {{/if}}
+                        {{else}}
+                            {{#if this.Steps.under_threshold}}
+                                {{#if this.Steps.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Steps.comment._id}}" id = "under_threshold">{{this.Steps.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Steps.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>EXERCISE</h2>
+                                            <p>{{this.Steps.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Steps.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                {{else}}
+                                    <td id="under_threshold">{{this.Steps.data}}</td>
+                                {{/if}}
+                            {{else}}
+                                {{#if this.Steps.comment.data}}
+                                    <td>
+                                        <a class="popup" href="#popup_flight_travlDil{{this.Steps.comment._id}}">{{this.Steps.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                        <div id="popup_flight_travlDil{{this.Steps.comment._id}}" class="overlay_flight_traveldil">
+                                            <div class="popup_flight_travlDil">
+                                                <h2>EXERCISE</h2>
+                                                <p>{{this.Steps.comment.entryTime}}</p>
+                                                <a class="close_flight_travelDl" href="#">&times;</a>
+                                                <div class="content_flightht_travel_dil"> {{this.Steps.comment.data}}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                {{else}}
+                                    <td>{{this.Steps.data}}</td>
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    {{else}}
+                        {{#if this.Steps.requirement}}
+                            {{#if this.Steps.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Steps.comment._id}}">  <img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Steps.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>EXERCISE</h2>
+                                            <p>{{this.Steps.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Steps.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{else}}
+                                <td>  </td>    
+                            {{/if}}  
+                        {{else}}
+                            <td>——</td>
+                        {{/if}}    
+                    {{/if}}
+                {{!-- no need to input this data,
+                but possibly need to input previously --}}
+                {{else}}
+                    {{#if this.Steps.requirement}}
+                        {{#if this.Steps.data}}
+                            {{#if this.Steps.over_threshold}}
+                                {{#if this.Steps.comment.data}}
+                                    <td>
+                                        <a class="popup" href="#popup_flight_travlDil{{this.Steps.comment._id}}" id = "over_threshold">{{this.Steps.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                        <div id="popup_flight_travlDil{{this.Steps.comment._id}}" class="overlay_flight_traveldil">
+                                            <div class="popup_flight_travlDil">
+                                                <h2>EXERCISE</h2>
+                                                <p>{{this.Steps.comment.entryTime}}</p>
+                                                <a class="close_flight_travelDl" href="#">&times;</a>
+                                                <div class="content_flightht_travel_dil">{{this.Steps.comment.data}}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                {{else}}
+                                    <td id="over_threshold">{{this.Steps.data}}</td>
+                                {{/if}}
+                            {{else}}
+                                {{#if this.Steps.under_threshold}}
+                                    {{#if this.Steps.comment.data}}
+                                        <td>
+                                            <a class="popup" href="#popup_flight_travlDil{{this.Steps.comment._id}}" id = "under_threshold">{{this.Steps.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                            <div id="popup_flight_travlDil{{this.Steps.comment._id}}" class="overlay_flight_traveldil">
+                                                <div class="popup_flight_travlDil">
+                                                    <h2>EXERCISE</h2>
+                                                    <p>{{this.Steps.comment.entryTime}}</p>
+                                                    <a class="close_flight_travelDl" href="#">&times;</a>
+                                                    <div class="content_flightht_travel_dil"> {{this.Steps.comment.data}}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    {{else}}
+                                        <td id="under_threshold">{{this.Steps.data}}</td>
+                                    {{/if}}
+                                {{else}}
+                                    {{#if this.Steps.comment.data}}
+                                        <td>
+                                            <a class="popup" href="#popup_flight_travlDil{{this.Steps.comment._id}}">{{this.Steps.data}}<img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                            <div id="popup_flight_travlDil{{this.Steps.comment._id}}" class="overlay_flight_traveldil">
+                                                <div class="popup_flight_travlDil">
+                                                    <h2>EXERCISE</h2>
+                                                    <p>{{this.Steps.comment.entryTime}}</p>
+                                                    <a class="close_flight_travelDl" href="#">&times;</a>
+                                                    <div class="content_flightht_travel_dil"> {{this.Steps.comment.data}}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    {{else}}
+                                        <td>{{this.Steps.data}}</td>
+                                    {{/if}}
+                                {{/if}}
+                            {{/if}}
+                        {{else}}
+                            {{#if this.Steps.comment.data}}
+                                <td>
+                                    <a class="popup" href="#popup_flight_travlDil{{this.Steps.comment._id}}">  <img src="/images/clinician_comment.png" id="commentIcon"></a> 
+                                    <div id="popup_flight_travlDil{{this.Steps.comment._id}}" class="overlay_flight_traveldil">
+                                        <div class="popup_flight_travlDil">
+                                            <h2>EXERCISE</h2>
+                                            <p>{{this.Steps.comment.entryTime}}</p>
+                                            <a class="close_flight_travelDl" href="#">&times;</a>
+                                            <div class="content_flightht_travel_dil"> {{this.Steps.comment.data}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{else}}
+                                <td>  </td>    
+                            {{/if}}
+                        {{/if}}
+                    {{else}}
+                        <td>——</td>
+                    {{/if}}
+                {{/if}}
+            </tr>
+        {{/each}}
+    </table>
+</div>
+
+<div class="overview" id="requirement">
+    <ul>
+        <li><h2>REQUIREMENTS</h2></li>
+        <li><button type="button" id="edit" onclick="window.location.href='{{patient_email}}/editRequirement'">Edit</button></li>
+    </ul>
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Requirement</th>
+            <th>Lower</th>
+            <th>Upper</th>
+        </tr>
+        <tr>
+            <td><a>BLOOD GLUCOSE</a></td>
+            <td>{{bloodglucose_require}}</td>
+            <td>{{bloodglucose_lower}}</td>
+            <td>{{bloodglucose_upper}}</td>
+        </tr>
+            <tr>
+            <td><a>WEIGHT</a></td>
+            <td>{{weight_require}}</td>
+            <td>{{weight_lower}}</td>
+            <td>{{weight_upper}}</td>
+        </tr>
+            <tr>
+            <td><a>INSULIN</a></td>
+            <td>{{insulin_require}}</td>
+            <td>{{insulin_lower}}</td>
+            <td>{{insulin_upper}}</td>
+        </tr>
+            <tr>
+            <td><a>EXERCISE</a></td>
+            <td>{{steps_require}}</td>
+            <td>{{steps_lower}}</td>
+            <td>{{steps_upper}}</td>
+        </tr>
+            
+        </table>
+    </div>
+    <div class="message" id="supportMessage">
+        <h2>SUPPORT MESSAGE</h2>
+        <hr>
+        {{#if supportMessage}}
+          <h3>{{supportMessageDate}} {{supportMessageTime}}</h3>
+          <h4>{{supportMessage}}</h4>
+        {{else}}
+           <h4>You haven't given this patient support message!</h4>
+        {{/if}}
+        <form action="" method = "POST">
+        <textarea name="supportMsg" id="supportMsg" placeholder="Update new message here..."></textarea>
+        <br>
+        <input value="Submit" type="submit" class="buttonInd">
+        </form>
+    </div>
+
+    <div class="message" id="note">
+        <h2>
+            CLINICAL NOTE 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" id="moreNotes" onclick="window.location.href='{{patient_email}}/clinicianNotes'">View more</button>
+        </h2>
+        </form>
+        <hr>
+        {{#if clinicalNote}}
+          <h3>{{clinicalNoteDate}} {{clinicalNoteTime}}</h3>
+          <h4>{{clinicalNote}}</h4>
+        {{else}}
+           <h4>You haven't given this patient clinical note!</h4>
+        {{/if}}
+        <form action="" method = "POST">
+        <textarea name="newnote" id="newnote" placeholder="Enter new message here..."></textarea>
+        <br>
+        <input value="Submit" type="submit" class="buttonInd">
+        </form>
+    </div>
+</main>
+
+<script>
+    $(document).ready(function() {
+        $("#supportMsg").emojioneArea({
+            pickerPosition: "bottom"
+        })
+    })
+
+    $(document).ready(function() {
+        $("#newnote").emojioneArea({
+            pickerPosition: "bottom"
+        })
+    })
+</script>

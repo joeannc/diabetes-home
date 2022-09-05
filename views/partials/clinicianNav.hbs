@@ -1,0 +1,141 @@
+<div class="clinicianNav">
+    
+    <script>
+        function to_dashboard() {
+            window.location.replace(`/clinician/dashboard`)
+        }
+        function to_registration() {
+            window.location.replace(`/clinician/patientRegistration`)
+        }
+        function to_profile() {
+            window.location.replace(`/clinician/profile`)
+        }
+        function to_resetpassword() {
+            window.location.replace(`/clinician/resetPassword`)
+        }
+    </script>
+
+    <div class="clinicianInfo">
+        <li><img src="/images/clinician_icon.png" style: width="100px" height = "100px"></li>
+        <li><p>{{clinician_name}}</p></li>
+    </div>
+
+    <div class="datetime">
+        <div class="date" id="date">
+            <span id="dayname">Day</span>
+            <li/>
+            <span id="month">Month</span>
+            /
+            <span id="daynum">00</span>
+            /
+            <span id="year">Year</span>
+        </div>
+        <div class="time" id="time">
+            <span id="hour">00</span>
+            :
+            <span id="minutes">00</span>
+            :
+            <span id="seconds">00</span>
+            <span id="period">AM</span>
+        </div>
+    </div>
+
+    <div class="pages">
+        <li/>
+        <li>
+            <img src="/images/dashboard.png" style: width="35px" height = "35px" >
+            <a onclick=to_dashboard()>Dashboard</a>
+        </li>
+
+        <li>
+            <img src="/images/patient_registration.png" width="33px" height = "33px" >
+            <a onclick=to_registration()>Patient Registration</a>
+        </li>
+        <li>
+            <img src="/images/patient_icon.png" style: width="35px" height = "35px" >
+            <a onclick=to_profile()>Profile</a>
+        </li>
+        <li>
+            <img src="/images/password.png" style: width="35px" height = "35px" >
+            <a onclick=to_resetpassword()>Reset Password</a>
+        </li>
+    </div>
+    
+
+    <div class="semi-circle">
+        <li><img src="https://i.ibb.co/6y5BHsp/logout.png" style: width="35px" height = "35px" ></li>
+        <li><a href = "/clinician/logout">Logout</a></li>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function updateClock() {
+    let now = new Date()
+    let dname = now.getDay(),
+        mo = now.getMonth(),
+        dnum = now.getDate(),
+        yr = now.getFullYear(),
+        hou = now.getHours(),
+        min = now.getMinutes(),
+        sec = now.getSeconds(),
+        pe = ''
+
+    Number.prototype.pad = function (digits) {
+        for (let n = this.toString(); n.length < digits; n = 0 + n) return n
+    }
+
+    let months = [
+        '01',
+        '02',
+        '03',
+        '04',
+        '05',
+        '06',
+        '07',
+        '08',
+        '09',
+        '10',
+        '11',
+        '12',
+    ]
+    let week = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+    ]
+    let ids = [
+        'dayname',
+        'month',
+        'daynum',
+        'year',
+        'hour',
+        'minutes',
+        'seconds',
+        'period',
+    ]
+    let values = [
+        week[dname],
+        months[mo],
+        dnum.pad(3),
+        yr,
+        hou.pad(5),
+        min.pad(5),
+        sec.pad(3),
+        pe,
+    ]
+    for (let i = 0; i < ids.length; i = i + 1) {
+        document.getElementById(ids[i]).firstChild.nodeValue = values[i]
+    }
+    }
+
+    function initClock() {
+    updateClock()
+    window.setInterval('updateClock()', 1)
+    }
+    
+    initClock()
+</script>

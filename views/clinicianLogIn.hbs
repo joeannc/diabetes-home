@@ -1,0 +1,63 @@
+<head>
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/css/clinicianLogIn.css" />
+</head>
+
+<div class="container">
+  <div class="header">
+    <h1>Login</h1>
+    {{#if l_error1}}
+    {{>login_error1}}
+    {{/if}}
+  </div>
+  <div class="details">
+    <img
+      src="/images/clinician_icon.png"
+      style: width="210px" height = "210px"
+      class="img"
+    />
+  
+    <form action="/clinician/login" method="post" class="form" id="form">
+      <div class="form-control">
+        <label>Username: </label>
+        <input
+          type="text"
+          placeholder="Enter your email here"
+          name="username"
+          id="username"
+          value="{{username}}"
+          required
+        />
+        {{! <i class="fas fa-check-circle"></i> }}
+        {{! <i class="fas fa-exclamation-circle"></i> }}
+      </div>
+
+      <div class="form-control">
+        <label>Password: </label>
+        <input
+          type="password"
+          placeholder="Enter your password here"
+          name="password"
+          id="password"
+          required
+        />
+        {{! <i class="fas fa-check-circle"></i> }}
+        {{! <i class="fas fa-exclamation-circle"></i> }}
+        {{#if l_error2}}
+        {{>login_error2}}
+        {{/if}}
+      </div>
+  </div>
+    <button>Login</button>
+  </form>
+
+  <script>
+    // once return back to the login page, considered the clinician has logged out
+      if (sessionStorage.getItem('clinician_email')){
+
+          sessionStorage.clear()
+          window.location.replace("/clinician/logout")
+      }
+      sessionStorage.clear()
+    </script>
+</div>

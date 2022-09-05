@@ -1,0 +1,61 @@
+body{
+    background-color: #EBF4FB;
+}
+.nav{
+    background-color: #20ABD7;
+}
+.dropdown-content{
+    color: #85898D;
+}
+.dropdown-content A{
+    color: #85898D;
+}
+.login-dropdown-content{
+    color: #85898D;
+}
+.login-dropdown-content a{
+    color: #85898D;
+}
+::-webkit-scrollbar-thumb {
+    background: #20ABD7;
+}
+::-webkit-scrollbar-track {
+    background: #ededed;
+}
+.rank .people {
+    background-color: #EBF4FB;
+}
+.bar {
+    border: 0.08rem solid rgb(32, 171, 215);
+}
+.fill {
+    border: #20ABD7;
+}
+#viewdata {
+    border: 1px solid #20ABD7;
+}
+#viewdata a {
+    color: #20ABD7;
+}
+.colour {
+    filter: invert(53%) sepia(83%) saturate(562%) hue-rotate(152deg) brightness(92%) contrast(82%);
+}
+#filter {
+    background-color: #85898D;
+}
+.filter #dropbtn {
+    color: #EBF4FB;
+}
+.info .data {
+    background-color: #d5dbe1;
+}
+.info #bio {
+    background-color: #d5dbe1;
+}
+form .btn {
+    background-color: #20ABD7;
+    border-color: #20ABD7;
+}
+.commentArea {
+    border-color: #313838;
+}

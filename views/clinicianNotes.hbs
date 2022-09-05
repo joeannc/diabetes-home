@@ -1,0 +1,107 @@
+<link rel="stylesheet" href="/css/clinicianStyle.css">
+
+{{>clinicianTitleBar}}
+
+{{>clinicianNav}} 
+
+<main>
+    <div class="clinicianNotes">
+        <div class="overview">
+            <ul>
+                <li>
+                    <h2>{{patient_screen_name}}'s Notes</h2>
+                    <p class="hint">   
+                        Start date: 
+                        <input id="startDate" type="date">  &nbsp; | &nbsp;
+                        End Date: 
+                        <input id="endDate" type="date">  &nbsp; | &nbsp;
+                        Range: 
+                        <select id="spaceTime" onchange="queryData(this, 'select')">
+                            <option>Select time period</option>
+                            <option value="">All</option>
+                            <option value="day">Query data within a day</option>
+                            <option value="week">Query data within a week</option>
+                            <option value="month">Query data within a month</option>
+                            <option>Select By given dates </option>
+                        </select>  &nbsp; | &nbsp;
+                        
+                        <button class="view-more" id="goBack" onclick="window.location.href='javascript:javascript:history.go(-1)'">
+                            <span class="circle" aria-hidden="true">
+                                <span class="icon arrow"></span>
+                            </span>
+                            <span class="button-text">Back to previous page</span>
+                            
+                        </button>
+                    </p>
+                </li>
+                <li class="border">
+                    <table>
+                        <tr><h4>Choose the range to see notes </h4> </tr>
+                    </table>
+                </li>
+            </ul>
+            <table>
+                <thead>
+                    <tr>
+                    <th width="150">Date</th>
+                    <th>Notes</th>
+                    </tr>
+                    
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+       	// 数据源
+      var notesData = {{{clinicalNote}}};
+      var selectBtn = document.querySelector('#spaceTime');
+ 
+
+    queryData();
+    // 查询函数
+    function queryData(select, searchType) {
+      var dayTime = 1000 * 60 * 60 * 24;
+      var weekTime = dayTime * 7;
+      var monthTime = dayTime * 30;
+      var selectVal = select ? select.value : '';
+      var startDate = document.querySelector('#startDate');
+      var startDateTime = Date.parse(startDate.value) - dayTime;
+      var endDate = document.querySelector('#endDate');
+      var endDateTime = Date.parse(endDate.value);
+      if (searchType === 'select') {
+        startDate.value = '';
+        endDate.value = '';
+      }
+      var result = notesData.filter((item) => {
+        var now = Date.now();
+        var itemTime = Date.parse(item.entryDate);
+        var timeSpace = now - itemTime;
+        if (selectVal === 'day') {  
+          return timeSpace > 0 && timeSpace < dayTime;
+        } else if (selectVal === 'week') { 
+          return timeSpace > 0 && timeSpace < weekTime;
+        } else if (selectVal === 'month') { 
+          return timeSpace > 0 && timeSpace < monthTime;
+        } else if (startDateTime > 0 && endDateTime > 0) { 
+          return itemTime >= startDateTime && itemTime <= endDateTime;
+        } else { 
+          return true;
+        }
+      })
+
+      var temp = result.reduce((t, d) => {
+        return t + `
+          <tr align="center">
+            <td>${d.entryDate}</td>
+            <td>${d.data}</td>
+          </tr>
+        `;
+      }, '') || `<tr align="center"><td colspan="4=999">You have not written any notes during this period</td></tr>`;
+      // 将模板字符串渲染到页面中
+      document.querySelector('#tbody').innerHTML = temp;
+      document.querySelector('#spaceTime').selectedIndex = 0;
+    }
+
+    </script>
+</main>

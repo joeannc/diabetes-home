@@ -1,0 +1,204 @@
+<html xmlns="http://www.w3.org/1999/xhtml"></html>
+<head>
+    <link rel="stylesheet" href="/css/clinicianStyle.css">
+</head>
+
+{{>clinicianTitleBar}}
+
+{{>clinicianNav}} 
+
+
+<div class="overview">
+    <ul>
+        <li>
+            <h2>TODAY PATIENTS' OVERVIEW</h2>
+            <p class="hint">Click patient's name to the individual patient page !</p>
+        </li>
+        
+        <li class="border">
+            <td><h4> -- : this data is not required to type </h4></td>
+            <td><h4><img src="/images/circle_red.png"  style: width="16px" height="16px"> : Over safety thresholds </h4> </td>
+            <td><h4><img src="/images/circle_blue.png"  style: width="16px" height="16px"> : Lower safety thresholds </h4></td>
+        </li>
+    </ul>
+    
+    <table id="myTable">
+        <tr>
+            <th>Name</th>
+            <th>Blood Glucose (nmol/L)</th>
+            <th>Weight (kg)</th>
+            <th>Insulin (doses)</th>
+            <th>Exercise (steps)</th>
+            <th>Status (%)</th>
+        </tr>
+        {{#each patient_record}}
+            {{#if this.judge}}
+                </tr>
+                    <td><a id="name" href="/clinician/AllPatients/{{this.email}}" onClick="req.session.patient_email = {{this.email}}">{{this.screen_name}}</a></td>
+                    {{#if this.Bloodglucose.requirement}}
+                        {{#if this.health_records.Bloodglucose.over_threshold}}
+                            <td id="over_threshold">{{this.health_records.Bloodglucose.data}}</td>
+                        {{else}}
+                            {{#if this.health_records.Bloodglucose.under_threshold}}
+                                <td id="under_threshold">{{this.health_records.Bloodglucose.data}}</td>
+                            {{else}}
+                                <td>{{this.health_records.Bloodglucose.data}}</td>
+                            {{/if}}
+                        {{/if}}
+                    {{else}}    
+                        <td>——</td>
+                    {{/if}}
+
+                    {{#if this.Weight.requirement}}
+                        {{#if this.health_records.Weight.over_threshold}}
+                            <td id="over_threshold">{{this.health_records.Weight.data}}</td>
+                        {{else}}
+                            {{#if this.health_records.Weight.under_threshold}}
+                                <td id="under_threshold">{{this.health_records.Weight.data}}</td>
+                            {{else}}
+                                <td>{{this.health_records.Weight.data}}</td>
+                            {{/if}}
+                        {{/if}}
+                    {{else}}    
+                        <td>——</td>
+                    {{/if}}
+
+                    {{#if this.Insulin.requirement}}
+                        {{#if this.health_records.Insulin.over_threshold}}
+                            <td id="over_threshold">{{this.health_records.Insulin.data}}</td>
+                        {{else}}
+                            {{#if this.health_records.Insulin.under_threshold}}
+                                <td id="under_threshold">{{this.health_records.Insulin.data}}</td>
+                            {{else}}
+                                <td>{{this.health_records.Insulin.data}}</td>
+                            {{/if}}
+                        {{/if}}
+                    {{else}}    
+                        <td>——</td>
+                    {{/if}}
+
+                    {{#if this.Steps.requirement}}
+                        {{#if this.health_records.Steps.over_threshold}}
+                            <td id="over_threshold">{{this.health_records.Steps.data}}</td>
+                        {{else}}
+                            {{#if this.health_records.Steps.under_threshold}}
+                                <td id="under_threshold">{{this.health_records.Steps.data}}</td>
+                            {{else}}
+                                <td>{{this.health_records.Steps.data}}</td>
+                            {{/if}}
+                        {{/if}}
+                    {{else}}    
+                        <td>——</td>
+                    {{/if}}
+                    
+                    <td>{{this.health_records.status}}</td>
+                </tr>
+            {{else}}
+                </tr>
+                    <td><a id="name" href="/clinician/AllPatients/{{this.email}}" onClick="sessionStorage.setItem('patient_email', '{{this.email}}')">{{this.screen_name}}</a></td>
+                    {{#if this.Bloodglucose.requirement}}
+                        <td>  </td>
+                    {{else}}    
+                        <td>——</td>
+                    {{/if}}
+
+                    {{#if this.Weight.requirement}}
+                        <td>  </td>
+                    {{else}}    
+                        <td>——</td>
+                    {{/if}}
+
+                    {{#if this.Insulin.requirement}}
+                        <td>  </td>
+                    {{else}}    
+                        <td>——</td>
+                    {{/if}}
+
+                    {{#if this.Steps.requirement}}
+                        <td>  </td>
+                    {{else}}    
+                        <td>——</td>
+                    {{/if}}
+
+                    <td>0</td>
+                </tr>
+            {{/if}}
+        {{/each}}
+    </table>
+</div>
+
+<div class="comment">
+    <h2>PATIENTS' COMMENT</h2>
+    {{#each comments}}
+        {{#if this.judge}}
+            {{#if this.Bloodglucose.requirement}}
+                {{#if this.health_records.Bloodglucose.comment.data}}
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="/images/patient_icon.png" style: width="60px" height="60px"></th>
+                            <th class="name_and_title"><a class="dcomment" href="/clinician/AllPatients/{{this.email}}">{{this.screen_name}}: Blood Glucose</a></th>
+                            <th class="comment_time"><a class="dcomment" href="/clinician/AllPatients/{{this.email}}">{{this.health_records.Bloodglucose.comment.entryTime}}</a></th>
+                        </tr>
+                        <tr>
+                            <td class="content"><p class="comment-text"><a class="dcomment" href="/clinician/AllPatients/{{this.email}}">{{this.health_records.Bloodglucose.comment.data}}</a></p></td>
+                        </tr> 
+                    </table>
+                    <br>
+                {{/if}}
+            {{/if}}
+            {{#if this.Weight.requirement}}
+                {{#if this.health_records.Weight.comment.data}}
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="/images/patient_icon.png" style: width="60px" height="60px"></th>
+                            <th class="name_and_title"><a class="dcomment" href="/clinician/AllPatients/{{this.email}}">{{this.screen_name}}: Weight</a></th>
+                            <th class="comment_time"><a class="dcomment" href="/clinician/AllPatients/{{this.email}}">{{this.health_records.Weight.comment.entryTime}}</a></th>
+                        </tr>
+                        <tr>
+                            <td class="content"><p class="comment-text"><a class="dcomment" href="/clinician/AllPatients/{{this.email}}">{{this.health_records.Weight.comment.data}}</a></p></td>
+                        </tr> 
+                    </table>
+                    <br>
+                {{/if}}
+            {{/if}}
+            {{#if this.Insulin.requirement}}
+                {{#if this.health_records.Insulin.comment.data}}
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="/images/patient_icon.png" style: width="60px" height="60px"></th>
+                            <th class="name_and_title"><a class="dcomment" href="/clinician/AllPatients/{{this.email}}">{{this.screen_name}}: Insulin Taken</a></th>
+                            <th class="comment_time"><a class="dcomment" href="/clinician/AllPatients/{{this.email}}">{{this.health_records.Insulin.comment.entryTime}}</a></th>
+                        </tr>
+                        <tr>
+                            <td class="content"><p class="comment-text"><a class="dcomment" href="/clinician/AllPatients/{{this.email}}">{{this.health_records.Insulin.comment.data}}</a></p></td>
+                        </tr> 
+                    </table>
+                    <br>
+                {{/if}}
+            {{/if}}
+            {{#if this.Steps.requirement}}
+                {{#if this.health_records.Steps.comment.data}}
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="/images/patient_icon.png" style: width="60px" height="60px"></th>
+                            <th class="name_and_title"><a class="dcomment" href="/clinician/AllPatients/{{this.email}}">{{this.screen_name}}: Exercise</a></th>
+                            <th class="comment_time"><a class="dcomment" href="/clinician/AllPatients/{{this.email}}">{{this.health_records.Steps.comment.entryTime}}</a></th>
+                        </tr>
+                        <tr>
+                            <td class="content"><p class="comment-text"><a class="dcomment" href="/clinician/AllPatients/{{this.email}}">{{this.health_records.Steps.comment.data}}</a></p></td>
+                        </tr> 
+                    </table>
+                    <br>
+                {{/if}}
+            {{/if}}
+        {{/if}}
+    {{/each}}
+</div>
+
+<script>
+    function save_into(x) {
+        return document.session.patient_email = x
+    }
+</script>
+
+

@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"></html>
+<head>
+    <link rel="stylesheet" href="/css/clinicianStyle.css">
+</head>
+
+{{>clinicianTitleBar}}
+
+{{>clinicianNav}} 
+
+
+
+<main>
+    <script>
+        var clinician_email = JSON.parse(sessionStorage.getItem("clinician_email"))
+        function to_editprofile() {
+            window.location.replace(`/clinician/editprofile`)
+        }
+    </script>
+
+    <table class="profile">
+        <tr>
+            <td>SCREEN NAME</td>
+            <td>{{clinician_screenname}}</td>
+        </tr>
+         <tr>
+            <td>LAST NAME</td>
+            <td>{{clinician_familyname}}</td>
+        </tr>
+        <tr>
+            <td>GIVEN NAME</td>
+            <td>{{clinician_givenname}}</td>
+        </tr>
+        <tr>
+            <td>USERID</td>
+            <td>{{clinician_email}}</td>
+        </tr>
+         <tr>
+            <td>Bio</td>
+            <td>{{clinician_bio}}</td>
+        </tr>  
+
+    </table>
+    <div class="editprofilebuttom"><a onclick=to_editprofile() style="text-decoration: none;">EDIT PROFILE</a></div>
+  
+
+</main>

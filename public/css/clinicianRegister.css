@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Lucida Fax','Lucida Sans',  'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #F0F8F4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #24D5D6;
+    border-radius: 5px;
+    box-shadow: 20px 20px 30px 0px rgba(0, 0, 0, 0.2);
+    height: 950px;
+    width: 800px;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.header {
+    color: #707070;
+    text-align: center;
+    padding: 20px 40px;
+    margin: 0;
+}
+
+.header h3 {
+    color: green;
+}
+
+.img {
+    position: relative;
+    border-radius: 50%;
+    left: 80px;
+    top: 70px;
+}   
+
+.form {
+    position: relative;
+    bottom: 16ch;
+    left: 35ch;
+    /* padding: 30px 5px; */
+}
+
+.form-control {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.form-control label {
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 6px;
+}
+
+.form-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    width: 40%;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.form-control textarea {
+    display: border;
+    width: 40%;
+    border-radius: 4px;
+}
+
+
+.form-control select {
+    display: block;
+    font-size: 100%;
+    width: 160px;
+    border-radius: 5px;
+}
+
+.form-control i {
+    position: absolute;
+    top: 35px;
+    left: 295px;
+    visibility: hidden;
+}
+
+.form-control small {
+    /* visibility: hidden; */
+    position: absolute;
+    color: red;
+}
+
+#text_area {
+    position: relative;
+    right: 323px;
+    top: 20px;
+}
+
+.form button {
+    position: absolute;
+    left: 240px;
+    /* top: 1000px; */
+    background-color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    border-radius: 20px;
+    color: #707070;
+    display: block;
+    width: 10%;
+    padding: 5px;
+    font-size: 15px;
+    transition: 0.4s;
+    cursor: pointer;
+    font-weight: 500;
+}

@@ -1,0 +1,167 @@
+<head>
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/css/clinicianRegister.css" />
+</head>
+
+<div class="container">
+  <div class="header">
+    <h1>Clinician Register</h1>
+    {{#if successMessage}}
+    <h3>{{successMessage}}</h3>
+    {{/if}}
+  </div>
+  <div>
+    <img
+      src="/images/clinician_icon.png"
+      style: width="200px" height = "200px"
+      class="img"
+    />
+  </div>
+  <form action="/clinician/register" method="post" class="form" id="form">
+    <div class="form-control">
+      <label>First_name: </label>
+      <input
+        type="text"
+        placeholder="Enter your First name here"
+        name="firstname"
+        id="firstname"
+        value="{{firstname}}"
+        required
+      />
+      {{!-- <i class="fas fa-check-circle"></i> --}}
+      {{!-- <i class="fas fa-exclamation-circle"></i> --}}
+      <small></small>
+    </div>
+
+    <div class="form-control">
+      <label>Last_name: </label>
+      <input
+        type="text"
+        placeholder="Enter your Last name here"
+        name="lastname"
+        id="lastname"
+        value="{{lastname}}"
+        required
+      />
+      {{!-- <i class="fas fa-check-circle"></i> --}}
+      {{!-- <i class="fas fa-exclamation-circle"></i> --}}
+      <small></small>
+    </div>
+
+    <div class="form-control">
+      <label>Screen name: </label>
+      <input
+        type="text"
+        placeholder="Enter your Screen name here"
+        name="screenname"
+        id="screenname"
+        value="{{screenname}}"
+        required
+      />
+      {{!-- <i class="fas fa-check-circle"></i> --}}
+      {{!-- <i class="fas fa-exclamation-circle"></i> --}}
+      <small></small>
+    </div>
+
+    <div class="form-control">
+      <label for="year">Year: </label>
+      <select name="year" id="year" value="{{year}}" required>
+        <option>Choose a year</option>
+      </select>
+      {{!-- <i class="fas fa-check-circle"></i> --}}
+      {{!-- <i class="fas fa-exclamation-circle"></i> --}}
+      <small></small>
+    </div>
+
+    <div class="form-control">
+      <label>Email: </label>
+      <input
+        type="text"
+        placeholder="Enter your Email"
+        name="email"
+        id="email"
+        value="{{email}}"
+        required
+      />
+      {{!-- <i class="fas fa-check-circle"></i> --}}
+      {{!-- <i class="fas fa-exclamation-circle"></i> --}}
+      {{#if r_error1}}
+      {{>register_error1}}
+      {{/if}}
+    </div>
+
+    <div class="form-control">
+      <label>Password with at least 8 characters: </label>
+      <input
+        type="password"
+        placeholder="Enter your Password here"
+        name="password"
+        id="password"
+        required
+      />
+      {{!-- <i class="fas fa-check-circle"></i> --}}
+      {{!-- <i class="fas fa-exclamation-circle"></i> --}}
+      {{#if r_error2}}
+      {{>register_error2}}
+      {{/if}}
+
+      {{#if r_error3}}
+      {{>register_error3}}
+      {{/if}}
+    </div>
+
+    <div class="form-control">
+      <label>Confirm password: </label>
+      <input
+        type="password"
+        placeholder="Enter your Password again"
+        name="password2"
+        id="password2"
+        required
+      />
+      {{!-- <i class="fas fa-check-circle"></i> --}}
+      {{!-- <i class="fas fa-exclamation-circle"></i> --}}
+      {{#if r_error4}}
+      {{>register_error4}}
+      {{/if}}
+    </div>
+
+    <div class="form-control">
+      <label>Bio: </label>
+      <br>
+      <textarea name="bio" 
+      id="bio"
+      placeholder="Enter you Bio here" 
+      cols="30" 
+      rows="4" 
+      required
+      ></textarea>
+      {{!-- <input
+        type="text"
+        placeholder="Enter your Bio here"
+        name="bio"
+        id="bio"
+      /> --}}
+      {{!-- <i class="fas fa-check-circle"></i> --}}
+      {{!-- <i class="fas fa-exclamation-circle"></i> --}}
+      <small id="text_area"></small>
+    </div>
+
+    <button>Register</button>
+  </form>
+</div>
+
+<script type="text/javascript">
+    const yearSelect = document.getElementById("year");
+    function populateYears(){
+        //Get the current year as a number
+        let year = new Date().getFullYear();
+        //Make the previous 100 years be an option
+        for(let i = 0; i < 101; i++){
+            const option = document.createElement("option");
+            option.textContent = year - i;
+            yearSelect.appendChild(option);
+        }
+    }
+    populateYears();
+</script>

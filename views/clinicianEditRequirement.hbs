@@ -1,0 +1,275 @@
+<head>
+    <link rel="stylesheet" href="/css/clinicianStyle.css">
+</head>
+
+{{>clinicianTitleBar}}
+
+{{>clinicianNav}} 
+
+<form action="/clinician/AllPatients/{{patient_email}}/editRequirement" method="post">
+    <div class="overview" id="editReq">
+        <h2>Patient: Pat</h2>
+        <table>
+            <tr>
+                <th>Subject</th>
+                <th>Requirement</th>
+                <th>Lower</th>
+                <th>Upper</th>
+            </tr>
+            <tr>
+                <td><a>BLOOD GLUCOSE</a></td>
+                <td>
+                    {{#if bloodglucose}}
+                        <input type="radio" name="yes_no_BG" value="true" onclick="bgtext(1)" checked>Yes</input>
+                        <input type="radio" name="yes_no_BG" value="false" onclick="bgtext(0)">No</input>
+                    {{else}}
+                    <input type="radio" name="yes_no_BG" value="true" onclick="bgtext(1)" >Yes</input>
+                    <input type="radio" name="yes_no_BG" value="false" onclick="bgtext(0)" checked>No</input>
+                    {{/if}}
+                </td>
+                <td>
+                    <input
+                        type="number" 
+                        id="lower_BG"
+                        name="lower_BG"
+                        step="0.1"
+                        min="0"
+                        placeholder="Enter lower number..."
+                        value="{{bg_Lower}}"
+                    />
+                    {{#unless bloodglucose}}
+                         <script>document.getElementById("lower_BG").style.display = "none"</script>
+                    {{/unless}}
+                </td>
+                <td>
+                    <input
+                        type="number" 
+                        id="upper_BG"
+                        name="upper_BG"
+                        step="0.1"
+                        min="0"
+                        placeholder="Enter upper number..."
+                        value="{{bg_Upper}}"
+                    />
+                    {{#unless bloodglucose}}
+                         <script>document.getElementById("upper_BG").style.display = "none"</script>
+                    {{/unless}}
+                </td>
+            </tr>
+                <tr>
+                <td><a>WEIGHT</a></td>
+                <td>
+                    {{#if weight}}
+                        <input type="radio" name="yes_no_WE" value="true" onclick="wetext(1)" checked>Yes</input>
+                        <input type="radio" name="yes_no_WE" value="false" onclick="wetext(0)">No</input>
+                    {{else}}
+                        <input type="radio" name="yes_no_WE" value="true" onclick="wetext(1)">Yes</input>
+                        <input type="radio" name="yes_no_WE" value="false" onclick="wetext(0)"checked>No</input>
+                    {{/if}}
+                </td>
+                <td>
+                    <input
+                        type="number" 
+                        id="lower_WE"
+                        name="lower_WE"
+                        step="0.1"
+                        min="0"
+                        placeholder="Enter lower number..."
+                        value="{{w_Lower}}"
+                    />
+                    {{#unless weight}}
+                         <script>document.getElementById("lower_WE").style.display = "none"</script>
+                    {{/unless}}
+                </td>
+                <td>
+                    <input
+                        type="number" 
+                        id="upper_WE"
+                        name="upper_WE"
+                        step="0.1"
+                        min="0"
+                        placeholder="Enter upper number..."
+                        value="{{w_Upper}}"
+                    />
+                    {{#unless weight}}
+                         <script>document.getElementById("upper_WE").style.display = "none"</script>
+                    {{/unless}}
+                </td>
+            </tr>
+                <tr>
+                <td><a>INSULIN</a></td>
+                <td>
+                    {{#if insulin}}
+                        <input type="radio" name="yes_no_IN" value="true" onclick="intext(1)" checked>Yes</input>
+                        <input type="radio" name="yes_no_IN" value="false" onclick="intext(0)">No</input>
+                    {{else}}
+                        <input type="radio" name="yes_no_IN" value="true" onclick="intext(1)">Yes</input>
+                        <input type="radio" name="yes_no_IN" value="false" onclick="intext(0)" checked>No</input>
+                    {{/if}}
+                </td>
+                <td>
+                    <input
+                        type="number" 
+                        id="lower_IN"
+                        name="lower_IN"
+                        min="0"
+                        placeholder="Enter lower number..."
+                        value="{{in_Lower}}"
+                    />
+                    {{#unless insulin}}
+                         <script>document.getElementById("lower_IN").style.display = "none"</script>
+                    {{/unless}}
+                </td>
+                <td>
+                    <input
+                        type="number" 
+                        id="upper_IN"
+                        name="upper_IN"
+                        min="0"
+                        placeholder="Enter upper number..."
+                        value="{{in_Upper}}"
+                    />
+                    {{#unless insulin}}
+                         <script>document.getElementById("upper_IN").style.display = "none"</script>
+                    {{/unless}}
+                </td>
+            </tr>
+                <tr>
+                <td><a>EXERCISE</a></td>
+                <td>
+                    {{#if steps}}
+                        <input type="radio" name="yes_no_EX" value="true" onclick="extext(1)" checked>Yes</input>
+                        <input type="radio" name="yes_no_EX" value="false" onclick="extext(0)" >No</input>
+                    {{else}}
+                        <input type="radio" name="yes_no_EX" value="true" onclick="extext(1)">Yes</input>
+                        <input type="radio" name="yes_no_EX" value="false" onclick="extext(0)" checked>No</input>
+                    {{/if}}
+                </td>
+                <td>
+                    <input
+                        type="number" 
+                        id="lower_EX"
+                        name="lower_EX"
+                        min="0"
+                        placeholder="Enter lower number..."
+                        value="{{s_Lower}}"
+                    />
+                    {{#unless steps}}
+                         <script>document.getElementById("lower_EX").style.display = "none"</script>
+                    {{/unless}}
+                </td>
+                <td>
+                    <input
+                        type="number" 
+                        id="upper_EX"
+                        name="upper_EX"
+                        min="0"
+                        placeholder="Enter upper number..."
+                        value="{{s_Upper}}"
+                    />
+                    {{#unless steps}}
+                         <script>document.getElementById("upper_EX").style.display = "none"</script>
+                    {{/unless}}
+                </td>
+            </tr>
+        </table>
+
+        <button type="submit" id="save"> Save </button>
+    </div>
+</form>
+
+<script>
+    function bgtext(x) {
+        if (x === 1) {
+            document.getElementById("lower_BG").style.display = "inline"
+            document.getElementById("upper_BG").style.display = "inline"
+        } else {
+            document.getElementById("lower_BG").style.display = "none"
+            document.getElementById("upper_BG").style.display = "none"
+        }
+        return  
+    }
+
+    function wetext(x) {
+        if (x === 1) {
+            document.getElementById("lower_WE").style.display = "inline"
+            document.getElementById("upper_WE").style.display = "inline"
+        } else {
+            document.getElementById("lower_WE").style.display = "none"
+            document.getElementById("upper_WE").style.display = "none"
+        }
+        return  
+    }
+
+    function intext(x) {
+        if (x === 1) {
+            document.getElementById("lower_IN").style.display = "inline"
+            document.getElementById("upper_IN").style.display = "inline"
+        } else {
+            document.getElementById("lower_IN").style.display = "none"
+            document.getElementById("upper_IN").style.display = "none"
+        }
+        return  
+    }
+
+    function extext(x) {
+        if (x === 1) {
+            document.getElementById("lower_EX").style.display = "inline"
+            document.getElementById("upper_EX").style.display = "inline"
+        } else {
+            document.getElementById("lower_EX").style.display = "none"
+            document.getElementById("upper_EX").style.display = "none"
+        }
+        return
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('input[name="yes_no_BG"]').change(function() {
+            if($(this).val() == "true") {
+                $('#lower_BG').prop('required', true)
+                $('#upper_BG').prop('required', true)
+            } else {
+                $('#lower_BG').prop('required', false)
+                $('#upper_BG').prop('required', false)
+            }
+        })
+    })
+
+    $(document).ready(function() {
+        $('input[name="yes_no_WE"]').change(function() {
+            if($(this).val() == "true") {
+                $('#lower_WE').prop('required', true)
+                $('#upper_WE').prop('required', true)
+            } else {
+                $('#lower_WE').prop('required', false)
+                $('#upper_WE').prop('required', false)
+            }
+        })
+    })
+
+    $(document).ready(function() {
+        $('input[name="yes_no_IN"]').change(function() {
+            if($(this).val() == "true") {
+                $('#lower_IN').prop('required', true)
+                $('#upper_IN').prop('required', true)
+            } else {
+                $('#lower_IN').prop('required', false)
+                $('#upper_IN').prop('required', false)
+            }
+        })
+    })
+
+    $(document).ready(function() {
+        $('input[name="yes_no_EX"]').change(function() {
+            if($(this).val() == "true") {
+                $('#lower_EX').prop('required', true)
+                $('#upper_EX').prop('required', true)
+            } else {
+                $('#lower_EX').prop('required', false)
+                $('#upper_EX').prop('required', false)
+            }
+        })
+    })
+</script>

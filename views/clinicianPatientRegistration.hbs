@@ -1,0 +1,330 @@
+<head>
+    <link rel="stylesheet" href="/css/clinicianStyle.css">
+    <link rel="stylesheet" href="/css/patientRegister.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+{{>clinicianTitleBar}}
+
+{{>clinicianNav}} 
+
+<div class="container">
+    <div class="header">
+        {{#if successMessage}}
+        <h3>{{successMessage}}</h3>
+        {{/if}}
+    </div>
+    <form action="/clinician/patientRegistration" method="post" class="form" id="form">
+        <div class="form-control">
+            <label>First Name: </label>
+            <input 
+                type="text"
+                placeholder="Enter patient's First name here"
+                name="firstname"
+                id="firstname"
+                value="{{firstname}}"
+                required
+            />
+        </div>
+
+        <div class="form-control">
+            <label>Last Name: </label>
+            <input 
+                type="text"
+                placeholder="Enter patient's Last Name here"
+                name="lastname"
+                id="lastname"
+                value="{{lastname}}"
+                required
+            />
+        </div>
+
+        <div class="form-control">
+            <label>Screen Name: </label>
+            <input 
+                type="text"
+                placeholder="Enter patient's Screen Name here"
+                name="screenname"
+                id="screenname"
+                value="{{screenname}}"
+                required
+            />
+        </div>
+
+        <div class="form-control">
+            <label for="r_year">Year: </label>
+            <br>
+            <select name="r_year" id="r_year" value="{{r_year}}" required>
+                <option>Choose a year</option>
+            </select>
+        </div>
+
+        <div class="form-control">
+            <label>Email: </label>
+            <input 
+                type="text"
+                placeholder="Enter patient's Email"
+                name="email"
+                id="email"
+                value="{{email}}"
+                required
+            />
+            {{#if r_error1}}
+            {{>register_error1}}
+            {{/if}}
+            {{#if r_error5}}
+            {{>register_error5}}
+            {{/if}}
+        </div>
+
+        <div class="form-control">
+            <label>Password with at least 8 characters: </label>
+            <input 
+                type="password"
+                placeholder="Enter patient's Password here"
+                name="password"
+                id="password"
+                required
+            />
+            {{#if r_error2}}
+            {{>register_error2}}
+            {{/if}}
+
+            {{#if r_error3}}
+            {{>register_error3}}
+            {{/if}}
+        </div>
+
+        <div class="form-control">
+            <label>Confirm Password: </label>
+            <input 
+                type="password"
+                placeholder="Enter Password again"
+                name="password2"
+                id="password2"
+                required
+            />
+            {{#if r_error4}}
+            {{>register_error4}}
+            {{/if}}
+        </div>
+
+        <div class="form-control">
+            <label>Bio: </label>
+            <br>
+            <textarea 
+                name="bio" 
+                id="bio"
+                placeholder="Enter patient's Bio here" 
+                cols="30" 
+                rows="4"
+                required
+            ></textarea>
+        </div>
+
+        <div class="container-requirement">
+            <div class="form-control-requirement">
+                <b><label>Blood Glucose</label></b>
+                <input type="radio" name="bg" value="true" onclick="gltext(1)" checked>
+                <label>Yes</label>
+                <input type="radio" name="bg" value="false" onclick="gltext(0)">
+                <label>No</label>
+                <div class="entry" id="bg_entry">
+                    <label>Lower: </label>
+                    <input 
+                        type="number"
+                        min="0"
+                        step="0.1"
+                        name="bg_lower"
+                        id="bg_lower"
+                        placeholder="Enter lower value here">
+                    <label>Upper: </label>
+                    <input 
+                        type="number"
+                        min="0"
+                        step="0.1"
+                        name="bg_upper"
+                        id="bg_upper"
+                        placeholder="Enter upper value here">
+                </div>
+            </div>
+
+            <div class="form-control-requirement">
+                <b><label>Weight</label></b>
+                <input type="radio" name="we" value="true" onclick="wetext(1)" checked>
+                <label>Yes</label>
+                <input type="radio" name="we" value="false" onclick="wetext(0)">
+                <label>No</label>
+                <div class="entry" id="we_entry">
+                    <label>Lower: </label>
+                    <input 
+                        type="number"
+                        min="0"
+                        step="0.1"
+                        name="we_lower"
+                        id="we_lower"
+                        placeholder="Enter lower value here">
+                    <label>Upper: </label>
+                    <input 
+                        type="number"
+                        min="0"
+                        step="0.1"
+                        name="we_upper"
+                        id="we_upper"
+                        placeholder="Enter upper value here">
+                </div>
+            </div>
+
+            <div class="form-control-requirement">
+                <b><label>Insulin</label></b>
+                <input type="radio" name="ins" value="true" onclick="intext(1)" checked>
+                <label>Yes</label>
+                <input type="radio" name="ins" value="false" onclick="intext(0)">
+                <label>No</label>
+                <div class="entry" id="ins_entry">
+                    <label>Lower: </label>
+                    <input 
+                        type="number"
+                        min="0"
+                        name="ins_lower"
+                        id="ins_lower"
+                        placeholder="Enter lower value here">
+                    <label>Upper: </label>
+                    <input 
+                        type="number"
+                        min="0"
+                        name="ins_upper"
+                        id="ins_upper"
+                        placeholder="Enter upper value here">
+                </div>
+            </div>
+
+            <div class="form-control-requirement">
+                <b><label>Exercise</label></b>
+                <input type="radio" name="st" value="true" onclick="sttext(1)" checked>
+                <label>Yes</label>
+                <input type="radio" name="st" value="false" onclick="sttext(0)">
+                <label>No</label>
+                <div class="entry" id="st_entry">
+                    <label>Lower: </label>
+                    <input 
+                        type="number"
+                        min="0"
+                        name="st_lower"
+                        id="st_lower"
+                        placeholder="Enter lower value here">
+                    <label>Upper: </label>
+                    <input 
+                        type="number"
+                        min="0"
+                        name="st_upper"
+                        id="st_upper"
+                        placeholder="Enter upper value here">
+                </div>
+            </div>
+        </div>
+
+        <button>Register</button>
+    </form>
+</div>
+
+
+<script>
+    function gltext(x) {
+        if (x === 1) {
+            document.getElementById("bg_entry").style.display = "block"
+        } else {
+            document.getElementById("bg_entry").style.display = "none"
+        } 
+        return
+    }
+
+    function wetext(x) {
+        if (x === 1) {
+            document.getElementById("we_entry").style.display = "block"
+        } else {
+            document.getElementById("we_entry").style.display = "none"
+        }
+    }
+
+    function intext(x) {
+        if (x === 1) {
+            document.getElementById("ins_entry").style.display = "block"
+        } else {
+            document.getElementById("ins_entry").style.display = "none"
+        }
+    }
+
+    function sttext(x) {
+        if (x === 1) {
+            document.getElementById("st_entry").style.display = "block"
+        } else {
+            document.getElementById("st_entry").style.display = "none"
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    const yearSelect = document.getElementById("r_year");
+    function populateYears(){
+        //Get the current year as a number
+        let year = new Date().getFullYear();
+        //Make the previous 100 years be an option
+        for(let i = 0; i < 101; i++){
+            const option = document.createElement("option");
+            option.textContent = year - i;
+            yearSelect.appendChild(option);
+        }
+    }
+    populateYears();
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('input[name="bg"]').change(function() {
+            if($(this).val() == "true") {
+                $('#bg_lower').prop('required', true)
+                $('#bg_upper').prop('required', true)
+            } else {
+                $('#bg_lower').prop('required', false)
+                $('#bg_upper').prop('required', false)
+            }
+        })
+    })
+
+    $(document).ready(function() {
+        $('input[name="we"]').change(function() {
+            if($(this).val() == "true") {
+                $('#we_lower').prop('required', true)
+                $('#we_upper').prop('required', true)
+            } else {
+                $('#we_lower').prop('required', false)
+                $('#we_upper').prop('required', false)
+            }
+        })
+    })
+
+    $(document).ready(function() {
+        $('input[name="ins"]').change(function() {
+            if($(this).val() == "true") {
+                $('#ins_lower').prop('required', true)
+                $('#ins_upper').prop('required', true)
+            } else {
+                $('#ins_lower').prop('required', false)
+                $('#ins_upper').prop('required', false)
+            }
+        })
+    })
+
+    $(document).ready(function() {
+        $('input[name="st"]').change(function() {
+            if($(this).val() == "true") {
+                $('#st_lower').prop('required', true)
+                $('#st_upper').prop('required', true)
+            } else {
+                $('#st_lower').prop('required', false)
+                $('#st_upper').prop('required', false)
+            }
+        })
+    })
+</script>

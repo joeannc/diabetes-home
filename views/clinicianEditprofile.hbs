@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"></html>
+<head>
+    <link rel="stylesheet" href="/css/clinicianStyle.css">
+</head>
+
+{{>clinicianTitleBar}}
+
+{{>clinicianNav}} 
+
+<main>
+    <script language="javascript">
+        var clinician_email = JSON.parse(sessionStorage.getItem("clinician_email"))
+        function sumbit_sure(){
+                var gnl=confirm("sure you want to submit?");
+                if (gnl==true){
+                    return windows.location.href='/clinician/{{clinician_email}}/profile';
+                }
+                else{
+                    return false;
+                }
+            }
+    </script>
+    <div class="editprofile">
+        <form action="" method = "POST" onsubmit="return sumbit_sure()">
+            <table class="editprofile">
+                <tr>
+                 <td>SCREEN NAME</td>
+                 <td><input type="text" id="screenname" name="screenname" value="{{clinician_screenname}}"></td>
+                </tr>
+                <tr>
+                 <td>LAST NAME</td>
+                 <td>{{clinician_familyname}}</td>
+                </tr>
+                <tr>
+                 <td>GIVEN NAME</td>
+                 <td>{{clinician_givenname}}</td>
+                </tr>
+               <tr>
+                 <td>USERID</td>
+                <td>{{clinician_email}}</td>
+                </tr>
+                <tr>
+                 <td>Bio</td>
+                 <td><textarea  rows="2" id="newbio" name="newbio" cols="20" >{{clinician_bio}}</textarea></td>
+                </tr>  
+            </table> 
+           <input value="Save" type="submit" id="savebtn">
+           
+        </form>             
+    </div>  
+        
+  
+</main>

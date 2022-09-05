@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"></html>
+<head>
+    <link rel="stylesheet" href="/css/clinicianStyle.css">
+</head>
+
+{{>clinicianTitleBar}}
+
+{{>clinicianNav}} 
+
+
+
+<main>
+    <script>
+        function to_individualPage() {
+            window.location.replace(`/clinician/AllPatients/{{patient_email}}`)
+        }
+  
+    </script>
+   
+    <div class="back"><a onclick=to_individualPage()> <img src="/images/back.png" width="50px" height = "50px" ></a></div>
+        
+
+    <table class="profile">
+        
+
+        <tr>
+            <td>SCREEN NAME</td>
+            <td>{{patient_screenname}}</td>
+        </tr>
+         <tr>
+            <td>LAST NAME</td>
+            <td>{{patient_familyname}}</td>
+        </tr>
+        <tr>
+            <td>GIVEN NAME</td>
+            <td>{{patient_givenname}}</td>
+        </tr>
+        <tr>
+            <td>USERID</td>
+            <td>{{patient_email}}</td>
+        </tr>
+         <tr>
+            <td>Bio</td>
+            <td>{{patient_bio}}</td>
+        </tr>  
+
+    </table>
+    
+  
+
+</main>
